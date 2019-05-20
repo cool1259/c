@@ -38,6 +38,8 @@ public class MainActivity extends AppCompatActivity {
     List<NameValuePair> nameValuePairs;
     ProgressDialog dialog = null;
     TextView tv;
+    String id;
+    String pwd;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,16 +89,19 @@ public class MainActivity extends AppCompatActivity {
                 }
             });
 
-            if (response.contains("login success")) {  //php에서 온 response가 login success면 로그인됨
+            if (response.contains("login success")) {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
                         Toast.makeText(MainActivity.this, "Login Success", Toast.LENGTH_SHORT).show();
                     }
                 });
-               // Intent intent = new Intent(getApplicationContext(), startmenu.class);
-            //    startActivity(intent);
-                startActivity((new Intent(MainActivity.this, startmenu.class)));
+                Intent intent = new Intent(getApplicationContext(), startmenu.class);
+                id = inputID.getText().toString();
+                pwd = inputPW.getText().toString();
+                intent.putExtra("id", id);
+                intent.putExtra("pass", pwd);
+                startActivity(intent);
                 finish();
             } else {                                          // 그게 아니면 실패
                 Toast.makeText(MainActivity.this, "Login Fail", Toast.LENGTH_SHORT).show();
@@ -113,7 +118,5 @@ public class MainActivity extends AppCompatActivity {
     {
         Intent intent = new Intent(getApplicationContext(), registerActtivity.class);
         startActivity(intent);
-       // Intent intent = new Intent(this, registerActtivity.class);
-        //startActivity(intent);
     }
 }
