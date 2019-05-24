@@ -38,8 +38,6 @@ public class MainActivity extends AppCompatActivity {
     List<NameValuePair> nameValuePairs;
     ProgressDialog dialog = null;
     TextView tv;
-    String id;
-    String pwd;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,11 +47,12 @@ public class MainActivity extends AppCompatActivity {
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
 
-        BtnSignUp = (Button)findViewById(R.id.button4);
-        BtnSignIn = (Button)findViewById(R.id.button3);
-        inputID = (EditText)findViewById(R.id.emailInput);
-        inputPW = (EditText)findViewById(R.id.passwordInput);
-        tv = (TextView)findViewById(R.id.textView2);
+        BtnSignUp = (Button) findViewById(R.id.button4);
+        BtnSignIn = (Button) findViewById(R.id.button3);
+        inputID = (EditText) findViewById(R.id.emailInput);
+        inputPW = (EditText) findViewById(R.id.passwordInput);
+
+        tv = (TextView) findViewById(R.id.textView2);
 
         BtnSignIn.setOnClickListener(new OnClickListener() {
             @Override
@@ -67,6 +66,14 @@ public class MainActivity extends AppCompatActivity {
                 }).start();
             }
         });
+        BtnSignUp.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), registerActtivity.class);
+                startActivity(intent);
+            }
+        });
+
     }
 
     void login() {
@@ -89,7 +96,7 @@ public class MainActivity extends AppCompatActivity {
                 }
             });
 
-            if (response.contains("login success")) {
+            if (response.contains("login success")) {  //php에서 온 response가 login success면 로그인됨
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
@@ -97,26 +104,22 @@ public class MainActivity extends AppCompatActivity {
                     }
                 });
                 Intent intent = new Intent(getApplicationContext(), startmenu.class);
-                id = inputID.getText().toString();
-                pwd = inputPW.getText().toString();
+
+
+                String id = inputID.getText().toString();
+                String pass = inputPW.getText().toString();
                 intent.putExtra("id", id);
-                intent.putExtra("pass", pwd);
+                intent.putExtra("pass", pass);
                 startActivity(intent);
+
+                // startActivity((new Intent(MainActivity.this, startmenu.class)));
                 finish();
             } else {                                          // 그게 아니면 실패
                 Toast.makeText(MainActivity.this, "Login Fail", Toast.LENGTH_SHORT).show();
             }
-        }
-        catch(Exception e)
-        {
+        } catch (Exception e) {
             dialog.dismiss();
             System.out.println("Exception : " + e.getMessage());
         }
-    }
+    }}
 
-    public void CliSignUp(View view)
-    {
-        Intent intent = new Intent(getApplicationContext(), registerActtivity.class);
-        startActivity(intent);
-    }
-}
