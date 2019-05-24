@@ -197,14 +197,14 @@ public class startmenu extends AppCompatActivity {
 
             System.out.println("내정보:");
 
-            int  s=result.indexOf(id);
+            int  s=result.indexOf(id+"\"");
 
             String information = result.substring(s, s+100);
             System.out.println(information);
          int ss = information.indexOf("OTP");
          OTP=information.substring(ss+7,ss+11);
-            tv.setText("내 정보\n"+information+"\n내otp:"+OTP);
-
+           tv.setText("내 정보\n"+information+"\n내otp:"+OTP);
+          //  tv.setText(result);
         }
 
     }
