@@ -1,8 +1,6 @@
 package com.example.otp;
 
-import android.app.AlertDialog;
 import android.app.ProgressDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -16,11 +14,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.BufferedReader;
-
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
-
 import java.net.HttpURLConnection;
 import java.net.URL;
 
@@ -33,9 +29,9 @@ public class registerActtivity extends AppCompatActivity {
     private EditText mEditTextID;
     private EditText mEditTextname;
     private EditText mEditTextpassword;
-    private EditText mEditTextHP;
-    private EditText mEditTextOTP;
-    private EditText mEditTextAuth;
+   private EditText mEditTextHP;
+   // private EditText mEditTextOTP;
+  //  private EditText mEditTextAuth;
     private TextView mTextViewResult;
 
 
@@ -110,7 +106,12 @@ public class registerActtivity extends AppCompatActivity {
             if (result.contains("사용자 추가함")) {
                 Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                 startActivity(intent);
-
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(registerActtivity.this, "회원가입 되었습니다.", Toast.LENGTH_SHORT).show();
+                    }
+                });
             }
         }
 
