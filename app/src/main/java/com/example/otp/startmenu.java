@@ -62,7 +62,7 @@ public class startmenu extends AppCompatActivity {
         Intent intent = new Intent(getIntent());
        id = intent.getStringExtra("id");
          pass = intent.getStringExtra("pass");
-        //  Toast.makeText(getApplicationContext(),"내가입력한아이디=" +id +"내가입력한비번"+pass , Toast.LENGTH_SHORT).show();
+         Toast.makeText(getApplicationContext(),"내가입력한아이디=" +id +"내가입력한비번"+pass , Toast.LENGTH_SHORT).show();
 
 
         tv = (TextView) findViewById(R.id.textView3);
